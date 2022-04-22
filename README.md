@@ -3,7 +3,7 @@ SlideTexts
 
 It allows you to get a better view by swiping the texts.
 
-![SlideTexts](https://raw.github.com/hdodenhof/CircleImageView/master/screenshot.png)
+![SlideTexts](https://github.com/zekibiyikli/SlideTexts/blob/main/sources/slidetexts.gif?raw=true)
 
 Gradle
 ------
@@ -26,7 +26,8 @@ dependencies {
 
 Usage
 -----
-```xml
+xml
+```
  <com.zekibiyikli.slidetexts.baseLayout
         android:id="@+id/lytSlideTexts"
         android:layout_width="0dp"
@@ -39,7 +40,8 @@ Usage
     </com.zekibiyikli.slidetexts.baseLayout>
 ```
 -----------
-```Code
+Code
+```
  var layout=findViewById<ConstraintLayout>(R.id.lytSlideTexts)
  var slideTexts=SlideTexts()
  var strings= arrayListOf("Title 1","Title 2","Title 3","Title 4","Title 5")
@@ -50,29 +52,32 @@ Usage
 
 Features
 -----------
-```You can change textcolor
+You can change textcolor
+```
  slideTexts.setColor(
             selectColor = R.color.selectcolor,
             unselectColor = R.color.unselectcolor)
 ```
 -----------
-```You can change textsize
+You can change textsize
+```
  slideTexts.setTextSize(
             selectSize = 25f,
             unselectSize = 20f)
 ```
 -----------
-```You can change text font
+You can change text font
+```
   slideTexts.setFont(resources.getFont(R.font.fontName))
 
 ```
 
 -----------
-```You can change speed
+You can change speed
+```
   slideTexts.setMillis(1000)
 
 ```
-
 
 
 Changelog
