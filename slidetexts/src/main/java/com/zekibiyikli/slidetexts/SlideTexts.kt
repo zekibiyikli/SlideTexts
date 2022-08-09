@@ -72,10 +72,12 @@ class SlideTexts {
         changeTextColor()
         changeTextSize()
         listTv[0].visibility= View.INVISIBLE
-        listTv[1].visibility= View.VISIBLE
+        //listTv[1].visibility= View.VISIBLE
+        showHideItem(listTv[1],1f,0f)
         listTv[2].visibility= View.VISIBLE
         listTv[3].visibility= View.VISIBLE
-        listTv[4].visibility= View.VISIBLE
+        showHideItem(listTv[4],0f,1f)
+        //listTv[4].visibility= View.VISIBLE
         valueAnimator(listGL[0],0)
         valueAnimator(listGL[1],1)
         valueAnimator(listGL[2],2)
@@ -93,7 +95,6 @@ class SlideTexts {
         listTv[2].setTextColor(ContextCompat.getColor(activity, selectColor))
         listTv[3].setTextColor(ContextCompat.getColor(activity, unselectColor))
         listTv[4].setTextColor(ContextCompat.getColor(activity, unselectColor))
-        listTv[0].typeface
     }
     private fun firstSizeChange(){
         listTv[0].setTextSize(unselectSize)
@@ -108,6 +109,23 @@ class SlideTexts {
         }
     }
 
+    private fun showHideItem(tv:TextView,startIndex:Float,endIndex:Float){
+        val valueAnimator = ValueAnimator.ofFloat(startIndex, endIndex)
+        valueAnimator.addUpdateListener {
+            val value = it.animatedValue as Float
+            tv.alpha=value
+            if (endIndex==0f && value==0f){
+                tv.visibility=View.INVISIBLE
+            }
+            if (startIndex==0f && value>0f){
+                tv.visibility=View.VISIBLE
+            }
+        }
+        valueAnimator.interpolator = LinearInterpolator()
+        valueAnimator.duration = 300
+        valueAnimator.start()
+    }
+
     private fun changeTextColor(){
         listTv[2].setTextColor(ContextCompat.getColor(activity, unselectColor))
         listTv[3].setTextColor(ContextCompat.getColor(activity, selectColor))
@@ -119,6 +137,7 @@ class SlideTexts {
     }
 
     private fun firstInitText(){
+        firstColorChange()
         try {
             listTv[1].text=listText[0]
             listTv[2].text=listText[1]
@@ -181,14 +200,14 @@ class SlideTexts {
 
     private fun startCountDownTimer(){
         countDownTimer=object : CountDownTimer(60000, millis) {
-                override fun onTick(millisUntilFinished: Long) {
-                    setSlide()
-                }
-
-                override fun onFinish() {
-                    start()
-                }
+            override fun onTick(millisUntilFinished: Long) {
+                setSlide()
             }
+
+            override fun onFinish() {
+                start()
+            }
+        }
     }
 
     fun setColor(selectColor:Int?,unselectColor:Int?){
